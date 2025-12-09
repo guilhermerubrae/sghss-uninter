@@ -1,0 +1,14 @@
+sghss - modelo uml (texto)
+author: guilherme abreu
+
+entidades:
+- paciente (id, idNumber, nome, email, birthDate)
+- especialidade (id, nome, descricao)
+- profissional (id, nome, registroProfissional, especialidade_id)
+- consulta (id, paciente_id, profissional_id, dataHora, status)
+- usuario (id, username, password, role)
+
+relacionamentos:
+paciente 1 - n consultas
+profissional 1 - n consultas
+profissional n - 1 especialidade
