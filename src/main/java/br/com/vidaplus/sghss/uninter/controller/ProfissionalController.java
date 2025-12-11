@@ -1,40 +1,31 @@
 package br.com.vidaplus.sghss.uninter.controller;
 
-import br.com.vidaplus.sghss.uninter.model.Profissional;
+import br.com.vidaplus.sghss.uninter.domain.Profissional;
 import br.com.vidaplus.sghss.uninter.service.ProfissionalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
+// controller para profissionais
 @RestController
 @RequestMapping("/api/v1/profissionais")
 public class ProfissionalController {
 
     private final ProfissionalService service;
 
-    public ProfissionalController(ProfissionalService service) {
-        this.service = service;
-    }
+    public ProfissionalController(ProfissionalService service) { this.service = service; }
 
     @PostMapping
-    public ResponseEntity<Profissional> criar(@RequestBody Profissional p) {
-        return ResponseEntity.ok(service.salvar(p));
-    }
+    public ResponseEntity<Profissional> create(@RequestBody Profissional p) { return ResponseEntity.ok(service.save(p)); }
 
     @GetMapping
-    public ResponseEntity<List<Profissional>> listar() {
-        return ResponseEntity.ok(service.listar());
-    }
+    public ResponseEntity<List<Profissional>> all() { return ResponseEntity.ok(service.findAll()); }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Profissional> buscar(@PathVariable Long id) {
-        return service.buscar(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
+    public ResponseEntity<Profissional> get(@PathVariable UUID id) { return ResponseEntity.ok(service.findById(id)); }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
-        service.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
+    public ResponseEntity<?> delete(@PathVariable UUID id) { service.delete(id); return ResponseEntity.noContent().build(); }
 }

@@ -1,8 +1,10 @@
 package br.com.vidaplus.sghss.uninter.repository;
 
-import br.com.vidaplus.sghss.uninter.model.Usuario;
+import br.com.vidaplus.sghss.uninter.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+import java.util.UUID;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, UUID> {
     Usuario findByUsername(String username);
 }

@@ -1,10 +1,11 @@
 package br.com.vidaplus.sghss.uninter.repository;
 
-import br.com.vidaplus.sghss.uninter.model.Consulta;
+import br.com.vidaplus.sghss.uninter.domain.Consulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
-    List<Consulta> findByPacienteId(Long pacienteId);
+public interface ConsultaRepository extends JpaRepository<Consulta, UUID> {
+    List<Consulta> findByPacienteId(UUID pacienteId);
 }

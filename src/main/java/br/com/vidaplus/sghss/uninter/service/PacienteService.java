@@ -1,28 +1,21 @@
 package br.com.vidaplus.sghss.uninter.service;
 
-import br.com.vidaplus.sghss.uninter.model.Paciente;
+import br.com.vidaplus.sghss.uninter.domain.Paciente;
 import br.com.vidaplus.sghss.uninter.repository.PacienteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PacienteService {
 
     private final PacienteRepository repository;
 
-    public PacienteService(PacienteRepository repository) {
-        this.repository = repository;
-    }
+    public PacienteService(PacienteRepository repository) { this.repository = repository; }
 
-    public Paciente salvar(Paciente paciente) { return repository.save(paciente); }
-
-    public List<Paciente> listarTodos() { return repository.findAll(); }
-
-    public Optional<Paciente> buscarPorId(Long id) { return repository.findById(id); }
-
-    public Paciente buscarPorIdNumber(String idNumber) { return repository.findByIdNumber(idNumber); }
-
-    public void deletar(Long id) { repository.deleteById(id); }
+    public Paciente save(Paciente p) { return repository.save(p); }
+    public List<Paciente> findAll() { return repository.findAll(); }
+    public Paciente findById(UUID id) { return repository.findById(id).orElse(null); }
+    public void delete(UUID id) { repository.deleteById(id); }
 }

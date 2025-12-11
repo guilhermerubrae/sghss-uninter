@@ -1,7 +1,7 @@
 package br.com.vidaplus.sghss.uninter;
 
 /*
- * projeto sghss - aplicação principal
+ * projeto sghss - aplicação completa (módulos adicionados)
  * author: guilherme abreu
  * comentários em minúsculas
  */
