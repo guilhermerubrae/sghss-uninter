@@ -5,48 +5,47 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /*
- * prontuário médico (medical record)
+ * entidade para representar prontuários médicos (medical records)
+ * contém paciente, profissional, data de criação e notas médicas
  * author: guilherme abreu
- * comentários em minúsculas
  */
-
 @Entity
-@Table(name = "medical_records")
+@Table(name = "medical_records") // define o nome da tabela no banco
 public class MedicalRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID) // gera automaticamente um id do tipo UUID
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "paciente_id", nullable = false)
+    @ManyToOne // relação muitos-para-um com paciente
+    @JoinColumn(name = "paciente_id", nullable = false) // coluna obrigatória
     private Paciente paciente;
 
-    @ManyToOne
-    @JoinColumn(name = "profissional_id")
+    @ManyToOne // relação muitos-para-um com profissional
+    @JoinColumn(name = "profissional_id") // coluna opcional, nem sempre terá profissional associado
     private Profissional profissional;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt; // data/hora de criação do prontuário
 
-    @Column(length = 4000)
-    private String notes;
+    @Column(length = 4000) // limite de caracteres para notas médicas
+    private String notes; // notas do prontuário
 
-    public MedicalRecord() {}
+    public MedicalRecord() {} // construtor padrão necessário para o JPA
 
-    public MedicalRecord(Paciente paciente, Profissional profissional, LocalDateTime createdAt, String notes) {
-        this.paciente = paciente;
-        this.profissional = profissional;
-        this.createdAt = createdAt;
-        this.notes = notes;
+    public MedicalRecord(Paciente paciente, Profissional profissional, LocalDateTime createdAt, String notes) { 
+        this.paciente = paciente; // define o paciente
+        this.profissional = profissional; // define o profissional
+        this.createdAt = createdAt; // define a data de criação
+        this.notes = notes; // define as notas médicas
     }
 
-    public UUID getId() { return id; }
-    public Paciente getPaciente() { return paciente; }
-    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
-    public Profissional getProfissional() { return profissional; }
-    public void setProfissional(Profissional profissional) { this.profissional = profissional; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-    public String getNotes() { return notes; }
-    public void setNotes(String notes) { this.notes = notes; }
+    public UUID getId() { return id; } // retorna o id do prontuário
+    public Paciente getPaciente() { return paciente; } // retorna o paciente
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; } // define o paciente
+    public Profissional getProfissional() { return profissional; } // retorna o profissional
+    public void setProfissional(Profissional profissional) { this.profissional = profissional; } // define o profissional
+    public LocalDateTime getCreatedAt() { return createdAt; } // retorna a data de criação
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; } // define a data de criação
+    public String getNotes() { return notes; } // retorna as notas médicas
+    public void setNotes(String notes) { this.notes = notes; } // define as notas médicas
 }
